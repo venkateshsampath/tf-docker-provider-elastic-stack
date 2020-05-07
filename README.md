@@ -1,0 +1,1 @@
+# Elasticsearch Stack using Terraform + Docker Provider

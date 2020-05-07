@@ -1,0 +1,10 @@
+filebeat.inputs:
+    - type: log
+      paths:
+          - /tmp/elasticstack/volume/logstash.log
+processors:
+    - add_tags:
+          tags: [web, production]
+          target: "environment"
+output.logstash:
+    hosts: ["logstash:5044"]
