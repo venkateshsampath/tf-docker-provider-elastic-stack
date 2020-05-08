@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">=0.12"
+}
+
 provider "docker" {}
 
 resource "docker_network" "elastic_net" {
@@ -47,7 +51,7 @@ resource "docker_container" "logstash" {
     external = 8089
   }
   volumes {
-    host_path = "${path.module}/config/custom-pipeline.conf"
+    host_path = abspath("config/custom-pipeline.conf")
     container_path = "/usr/share/logstash/pipeline/sample-pipeline.conf"
   }
 }
@@ -62,11 +66,11 @@ resource "docker_container" "filebeat" {
     external = 5044
   }
   volumes {
-    host_path = "${path.module}/config/filebeat.yml"
+    host_path = abspath("config/filebeat.yml")
     container_path = "/usr/share/filebeat/filebeat.yml"
   }
   volumes {
-    host_path = "${path.module}/config/logstash.log"
+    host_path = abspath("config/logstash.log")
     container_path = "/usr/share/filebeat/logstash.log"
 
   }
